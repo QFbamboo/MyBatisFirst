@@ -11,9 +11,9 @@
             <!-- 数据库连接池-->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://qdm114586148.my3w.com:3306/qdm114586148_db" />
-                <property name="username" value="qdm114586148" />
-                <property name="password" value="jiangroot" />
+                <property name="url" value="jdbc:mysql://************.my3w.com:3306/******" />
+                <property name="username" value="******" />
+                <property name="password" value="******" />
             </dataSource>
         </environment>
     </environments>
