@@ -18,4 +18,45 @@
     <select id="findUserById" parameterType="int" resultType="cn.mybatis.po.User">
         select * from user where id=#{id}
     </select>
+    <!--根据用户名模糊查询用户信息，可能返回多条
+        resultType:指定的就是单条记录所映射的java对象类型
+        ${}:表示拼接字符串，将接收到的参数内容不加任何修饰拼接在参数中
+        使用${}拼接字符串，可能会引起sql注入
+        ${value}:接收输入参数的内容，如果传入类型是简单类型，${}中只能使用value
+    -->
+    <select id="findUserByName" parameterType="java.lang.String" resultType="cn.mybatis.po.User">
+        select * from user where username like '%${value}%'
+    </select>
+
+    <!--添加用户
+        parameterType:指定输入参数的类型是pojo(包括用户信息)
+        #{}中指定Pojo的属性名，接收到Pojo的对象属性值，mybatis通过OGNL获取对象的属性值
+    -->
+    <insert id="insertUser" parameterType="cn.mybatis.po.User">
+        <!--
+         将插入数据的主键返回，返回到User对象中
+         select last_insert_id():得到刚insert进去记录的主键值，只适用于自增主键
+         keyProperty：将查询到的主键值设置到parameterType指定对象的id属性
+         order:select last_insert_id()的执行顺序
+         resultType:指定last_insert_id()结果的类型
+        -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+        </selectKey>
+        insert into user(username,birthday,sex,address) value(#{username},#{birthday},#{sex},
+        #{address})
+    </insert>
+
+    <!--删除用户
+        根据id删除用户，需要输入Id值
+    -->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where id=#{id}
+    </delete>
+
+    <!--更新用户-->
+    <update id="updateUser" parameterType="cn.mybatis.po.User">
+        update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address}
+        where id=#{id}
+    </update>
 </mapper>
