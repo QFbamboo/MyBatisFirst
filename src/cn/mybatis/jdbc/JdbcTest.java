@@ -24,8 +24,8 @@ public class JdbcTest {
             Class.forName("com.mysql.jdbc.Driver");
 
             //通过驱动管理类获取数据库链接
-            connection = DriverManager.getConnection("jdbc:mysql://qdm114586148.my3w.com:3306/qdm114586148_db",
-                    "qdm114586148", "jiangroot");
+            connection = DriverManager.getConnection("jdbc:mysql://**************.com:3306",
+                    "********", "*********");
             //定义sql语句 ?表示占位符
             String sql = "select * from UserInfo where UserName = ?";
             //获取预处理statement
